@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button onclick="getTestList()">가져오기</button>
+<script>
+function getTestList(){
+var xhr = new XMLHttpRequest();
+xhr.open('GET','/test?list=true');
+xhr.onreadystatechange = function(){
+	if(xhr.readyState==4){
+		alert(xhr.responseText);
+	}
+}
+xhr.send();
+}
+</script>
+</body>
+</html>

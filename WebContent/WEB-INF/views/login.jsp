@@ -30,6 +30,17 @@ function doLogin(){
 	}
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST','/user/login')
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState==4){
+			if(xhr.status==200){
+				var res = JSON.parse(xhr.responseText);
+				alert(res.msg);
+				if(res.result=='ok'){
+					log
+				}
+			}
+		}
+	}
 	xhr.send(JSON.stringify(params));
 }
 </script>

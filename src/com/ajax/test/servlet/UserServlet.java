@@ -1,10 +1,7 @@
 package com.ajax.test.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,22 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-@WebServlet(urlPatterns = "/test/*")
-public class TestServlet extends HttpServlet {
+
+@WebServlet("/User")
+public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Gson g = new Gson();
-	
-	
+	Gson gson = new Gson();
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter pw = response.getWriter();
-		int num1 = Integer.parseInt(request.getParameter("num1"));
-		int num2 = Integer.parseInt(request.getParameter("num2"));
-		
-		pw.print(num1+num2);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		BufferedReader br = request.getReader();
+		String str;
+		StringBuffer sb = new StringBuffer();
+		while((str=br.readLine())!=null) {
+			sb.append(str);
+		}
+		Map<String,String> pMap = gson.fromJson(sb.toString(), Map.class);
+		System.out.println(pMap);
 	}
 
 }
